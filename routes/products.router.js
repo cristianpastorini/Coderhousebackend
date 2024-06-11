@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { productManager } from '../index.js';
+import { pid } from "process";
 
 const productsRouter = Router();
 

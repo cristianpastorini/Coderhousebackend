@@ -3,7 +3,7 @@ import {v4 as uuidv4} from 'uuid'
 
 export class CartManager {
     constructor() {
-        this.path = 'cart.json';
+        this.path = '../data/cart.json';
         this.carts = [];
     }
     getCarts = async () => {
@@ -14,7 +14,7 @@ export class CartManager {
     getCartProducts = async (id) => {
         const carts = await this.getCarts()
 
-        const cart = carts.find(cart =>cart.id === id);
+        const cart = carts.find(cart => cart.id === id);
         if (cart) {
             return cart.products
         }else{

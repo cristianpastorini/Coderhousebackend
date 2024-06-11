@@ -1,9 +1,9 @@
-import {promises as fs} from "fs";
+import { promises as fs } from 'fs';
 import {v4 as uuidv4 } from "uuid";
 
 export class ProductManager {
     constructor(){
-        this.path = 'products.json';
+        this.path = 'data/products.json';
         this.products = [];
     }
     addProduct = async ({title, description, price, thumbnail, code, stock, status, category}) => {
@@ -23,7 +23,7 @@ export class ProductManager {
     }
 
     getProductsById = async (id) => {
-        const response = this.getProducts();
+        const response = await this.getProducts();
         const product = response.find(product => product.id === id);
 
         if(product){
@@ -33,12 +33,12 @@ export class ProductManager {
         };
     };
 
-    updateProduct = async (id, {... data}) => {
+    updateProduct = async (id, {...data}) => {
         const products = await this.getProducts();
         const index = products.findIndex(product => product.id === id);
 
         if(index != -1){
-            products[index] = [id, ...data];
+            products[index] = {id, ...data};
             await fs.writeFile(this.path, JSON.stringify(products));
             return products[index];
         }else{
