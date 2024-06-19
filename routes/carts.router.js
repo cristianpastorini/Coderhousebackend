@@ -1,36 +1,35 @@
-import { Router } from "express"
-import { cartManager } from "../index.js"
-
+import { Router } from "express";
+import { cartManager } from "../index.js";
 
 const cartsRouter = Router();
 
-cartsRouter.post('/', async (req, res) =>{
+cartsRouter.post("/", async (req, res) =>{
     try {
-        const response = await cartManager.newCart()
-            res.join(response)
+        const response = await cartManager.newCart();
+        res.join(response);
     } catch (error) {
-        res.send('Error al crear carrito')
+        res.send("Error al crear carrito");
     }
-})
+});
 
-cartsRouter.get('/:cid', async (req, res) => {
-    const {cid} = req.params;
+cartsRouter.get("/:cid", async (req, res) => {
+    const { cid } = req.params;
     try {
-        const response = await cartManager.getCartProducts(cid)
-        res.json(response)
+        const response = await cartManager.getCartProducts(cid);
+        res.json(response);
     } catch (error) {
-        res.send('Error al intentar enviar los productos del carrito')
+        res.send("Error al intentar enviar los productos del carrito");
     }
-})
-cartsRouter.post('/:cid/products/:pid', async (req, res) => {
-    const {cid, pid} = req.params;
+});
+cartsRouter.post("/:cid/products/:pid", async (req, res) => {
+    const { cid, pid } = req.params;
     try {
-        await cartManager.addProductToCart(cid, pid)
-        res.send('Producto agregado al carrito')
+        await cartManager.addProductToCart(cid, pid);
+        res.send("Producto agregado al carrito");
     } catch (error) {
-        res.send('Error al agregar producto al carrito')
+        res.send("Error al agregar producto al carrito");
     }
-}
-)
+},
+);
 
-export {cartsRouter};
+export { cartsRouter };

@@ -1,0 +1,30 @@
+ <div>
+    <h1>Nuestro productos</h1>
+            <ul>
+                {{#each products}}
+                <li>Titulo: {{this.title}}</li>
+                <li>Descripcion:{{this.description}} </li>
+                <li>Precio:{{this.price}} </li>
+                <li>Imagen:{{this.thumbnail}} </li>
+                <li>Codigo:{{this.code}} </li>
+                <li>Stock:{{this.stock}} </li>
+                <li>Status:{{this.status}} </li>
+                <li>Categoria:{{this.category}} </li>
+                <li></br></li>
+                {{/each}}
+            </ul>
+</div>
+
+<h2>Que desea comprar?</h2>
+
+<form>
+  <label for = "producto"> Selecciona tus productos :</label>
+  <select id="producto" name= "producto">
+    <option value="producto1">Fernet Branca</option>
+    <option value="producto2">Brahma</option>
+    <option value="producto3">Quilmes</option>
+    <option value="producto2">Baron B</option>
+    <option value="producto3">Chandon</option>
+  </select>
+    <button type="submit">Agregar producto</button>
+</form>
