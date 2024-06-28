@@ -1,1 +1,11 @@
-[{"id":"b4376a07-fc0b-4abd-92b6-f5f4ddd3c582","title":"Fernet Branca","description":"Bebida alcoholica","price":15000,"thumbnail":"public/imagen.png","code":1,"stock":200,"status":"true","category":"Aperitivos"},{"id":"9ea0a4fd-fc97-4005-8b11-3f03fc012eff","title":"Brahma","description":"Bebida alcoholica","price":11000,"thumbnail":"public/imagen1.png","code":2,"stock":150,"status":"true","category":"Cervezas"},{"id":"335e12ed-5091-4187-b79c-acabdb437286","title":"Quilmes","description":"Bebida alcoholica","price":9500,"thumbnail":"public/imagen2.png","code":3,"stock":200,"status":"true","category":"Cervezas"},{"id":"a2375344-fb9a-4130-a9f1-55d7641b23fa","title":"Chandon","description":"Bebida alcoholica","price":18000,"thumbnail":"public/imagen3.png","code":4,"stock":90,"status":"true","category":"Vinos espumantes"},{"id":"21783acd-59c7-4864-94b9-d64d721637f4","title":"Baron B","description":"Bebida alcoholica","price":25000,"thumbnail":"public/imagen4.png","code":5,"stock":40,"status":"true","category":"Vinos espumantes"}]
+[
+	{
+		"id": 1,
+		"name": "Fernet Branca",
+		"description": "aperitivo",
+		"price": "23e22",
+		"code": "23e2e",
+		"stock": "23e23",
+		"category": "aperitivo"
+	}
+]

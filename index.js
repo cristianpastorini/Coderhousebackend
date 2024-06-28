@@ -1,73 +1,45 @@
-/* import express from "express";
-import path from "./utils/path.js";
-import { ProductManager } from "./Manager/productManager.js";
-import { CartManager } from "./Manager/cartManager.js";
-import { cartsRouter } from "./routes/carts.router.js";
-import { productosRouter } from "./routes/productos.router.js";
-import serverSocketIO from "./config/socket.config.js";
-import configHandlebars from "./config/handlebars.config.js";
-import { productsRouter } from "./routes/products.router.js";
-
-const PORT = 8080;
-const HOST = "localhost"; // 127.0.0.1
-const app = express();
-
-export const productManager = new ProductManager;
-export const cartManager = new CartManager;
-
-app.use("/api/public", express.static(path.public));
-app.use(express.json());
-app.use("/api/products", productsRouter);
-app.use("/api/carts", cartsRouter);
-app.use("/api/productos", productosRouter);
-
-const serverHTTP = app.listen(PORT, () => {
-    console.log(`ejecutándose en http://${HOST}:${PORT}`);
-});
-
-configHandlebars.config(app);
-serverSocketIO.config(serverHTTP); */
-
 import express from "express";
-import path from "./utils/path.js";
-import { ProductManager } from "./Manager/productManager.js";
-import { CartManager } from "./Manager/cartManager.js";
-import { productsRouter } from "./routes/products.router.js";
-import { cartsRouter } from "./routes/carts.router.js";
-import serverSocketIO from "./config/socket.config.js";
-import configHandlebars from "./config/handlebars.config.js";
+import paths from "./utils/paths.js";
+import handlebars from "./config/handlebars.config.js";
+import serverSocket from "./config/socket.config.js";
+import homeRouter from "./routes/app/home.router.js";
+import productsApiRouter from "./routes/api/products.router.js";
+import cartsApiRouter from "./routes/api/carts.router.js";
 
+const server = express();
 const PORT = 8080;
-const HOST = "localhost"; // 127.0.0.1
-const app = express();
+const HOST = "localhost";
 
-export const productManager = new ProductManager;
-export const cartManager = new CartManager;
+// Decodificadores del BODY
+server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
 
-//Declaración de ruta estática
-app.use("/api/public", express.static(path.public));
+// Enrutadores
+server.use("/", homeRouter);
+server.use("/api/products", productsApiRouter);
+server.use("/api/carts", cartsApiRouter);
 
-//Declaración de rutas
-app.use(express.json());
-app.use("/api/products", productsRouter);
-app.use("/api/carts", cartsRouter);
+// Declaración de ruta estática: http://localhost:8080/api/public
+server.use("/api/public", express.static(paths.public));
 
-//Control de rutas inexistentes
-app.use("*", (req, res) => {
+// Configuración del motor de plantillas
+handlebars.config(server);
+
+// Control de rutas inexistentes
+server.use("*", (req, res) => {
     res.status(404).send("<h1>Error 404</h1><h3>La URL indicada no existe en este servidor</h3>");
 });
 
-//Control de errores internos
-app.use((error, req, res) => {
+// Control de errores internos
+server.use((error, req, res) => {
     console.log("Error:", error.message);
     res.status(500).send("<h1>Error 500</h1><h3>Se ha generado un error en el servidor</h3>");
 });
 
-//Método oyente de solicitudes
-const serverHTTP = app.listen(PORT, () => {
-    console.log(`ejecutándose en http://${HOST}:${PORT}`);
+// Método oyente de solicitudes
+const serverHTTP = server.listen(PORT, () => {
+    console.log(`Ejecutándose en http://${HOST}:${PORT}`);
 });
 
-//Configuración de motor de plantillas
-configHandlebars.config(app);
-serverSocketIO.config(serverHTTP);
+// Configuración del servidor de websocket
+serverSocket.config(serverHTTP);

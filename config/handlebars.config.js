@@ -1,10 +1,10 @@
 import handlebars from "express-handlebars";
-import path from "../utils/path.js";
+import paths from "../utils/paths.js";
 
-const config = (serverHTTP) =>{
-    serverHTTP.engine("handlebars", handlebars.engine()); //configuracion de handlebars
-    serverHTTP.set("views", path.views);
-    serverHTTP.set("view engine", "handlebars");
+const config = (server) =>{
+    server.engine("handlebars", handlebars.engine()); //configuracion de handlebars
+    server.set("views", paths.views);
+    server.set("view engine", "handlebars");
 };
 
 export default { config };
